@@ -1,0 +1,20 @@
+<script type="text/ng-template" id="assets/views/modals/renamePhoto.html">
+    <md-dialog class="md-modal md-modal-wide rename-photo-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'rename' | translate }} {{:: selectedItem.get('name') }}</h1>
+            <div ng-click="photos.closeModal()" class="md-close-modal"><i class="mdi mdi-close"></i></div>
+        </div>
+        <form ng-submit="photos.rename(selectedItem.get('id'))">
+            <md-input-container>
+                <label for="photo-name">{{:: 'name' | translate }}</label>
+                <input id="photo-name" type="text" ng-model="photos.photoNameModel" required>
+                <div class="md-modal-error"></div>
+            </md-input-container>
+
+            <div class="buttons">
+                <md-button type="button" ng-click="photos.closeModal()">{{:: 'cancel' | translate }}</md-button>
+                <md-button type="submit" ng-disabled="!photos.photoNameModel" class="md-raised md-primary">{{:: 'rename' | translate }}</md-button>
+            </div>
+        </form>
+    </md-dialog>
+</script>

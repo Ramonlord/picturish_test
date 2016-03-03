@@ -1,0 +1,37 @@
+<script type="text/ng-template" id="assets/views/modals/share.html">
+    <md-dialog class="md-modal md-modal-wide share-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'share' | translate }} {{:: shareable.name }} <span ng-if="rawType == 'folder'">{{ type }}</span></h1>
+            <div ng-click="closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+
+        <md-input-container>
+            <label>{{:: 'linkToShare' | translate }}</label>
+            <input id="share-modal-input" readonly="true" type="text" ng-model="link" ed-select-on-clickelectedItem>
+        </md-input-container>
+
+        <ed-share-icons></ed-share-icons>
+
+        <div class="password-info">
+            <i class="mdi mdi-lock-open"></i>
+            <div ng-if="!shareable.password">{{:: 'notPassProtected' | translate }} {{:: type }}. <span ng-click="togglePasswordContainer()" class="link">{{:: 'addPassword' | translate }}</span></div>
+            <div ng-if="shareable.password">{{:: 'this' | translate }} {{:: type }} {{:: 'passProtected' | translate }}. <span ng-click="removePassword()" class="link">{{:: 'remove' | translate }}</span></div>
+        </div>
+
+        <section class="password-container" ng-if="passwordContainerVisible">
+            <md-input-container>
+                <label>{{:: 'password' | translate }}</label>
+                <input type="password" ng-model="password.value">
+            </md-input-container>
+
+            <div class="buttons">
+                <md-button ng-click="closePasswordContainer()">{{:: 'cancel' | translate }}</md-button>
+                <md-button ng-disabled="!password.value" ng-click="addPassword()" class="md-primary md-raised">{{:: 'add' | translate }}</md-button>
+            </div>
+        </section>
+
+        <div class="buttons" ng-hide="passwordContainerVisible">
+            <md-button ng-click="closeModal()" class="md-raised md-primary">{{:: 'done' | translate }}</md-button>
+        </div>
+    </md-dialog>
+</script>

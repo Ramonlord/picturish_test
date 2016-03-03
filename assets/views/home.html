@@ -1,0 +1,56 @@
+<div id="home" ng-controller="UploadController">
+    <div class="overlay">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="home">
+                        <!--{{ utils.getSetting('siteName') }}-->
+                        <img class="logo" src="assets/images/logo_light.png" alt="logo"/>
+                    </a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right" ng-show="!users.current">
+                    <li ng-if="utils.getSetting('enableRegistration', true)"><a ui-sref="register">{{:: 'register' | translate }}</a></li>
+                    <li><a ui-sref="login" class="login-button">{{:: 'login' | translate }}</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" ng-show="users.current">
+                    <li class="logged-in-container" data-toggle="dropdown">
+                        <div class="dropdown">
+                            <img ng-src="{{ users.getAvatar() }}"/>
+                            <a href="">{{ users.getUsernameForCurrentUser() }}</a>
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu">
+                                <li ng-if="users.current.isAdmin" ui-sref="admin.analytics"><a href=""><i class="icon icon-lock-filled"></i>{{:: 'adminArea' | translate }}</a></li>
+                                <li ui-sref="dashboard.albums"><a href=""><i class="icon icon-gauge"></i>{{:: 'dashboard' | translate }}</a></li>
+                                <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                                <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                                <li class="separator"></li>
+                                <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-params"></i> {{:: 'accountSettings' | translate }}</a></li>
+                                <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content" ng-file-drop drag-over-class="dragover" ng-file-change="upload($files)" ng-multiple="true" allow-dir="true">
+
+            <demo-info-container id="demo-container" ng-if="utils.isDemo"></demo-info-container>
+
+            <div class="home-jumbotron">
+                <h1>{{:: utils.getSetting('homeTagline')  }}</h1>
+                <p>{{:: utils.getSetting('homeByline')  }}</p>
+                <md-button ui-sref="register" class="md-primary md-raised">{{:: utils.getSetting('homeButtonText') }}</md-button>
+            </div>
+
+            <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+        </div>
+
+        <ed-photos-waiting></ed-photos-waiting>
+
+        <div ng-include="baseUrl+'assets/views/modals.html'"></div>
+    </div>
+</div>

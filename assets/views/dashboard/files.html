@@ -1,0 +1,149 @@
+<div ng-class="{'album-empty': dashboardState.loaded && (! items || ! items.length)}">
+
+    <section ng-if="selectedView === 'grid' && items.length" class="user-items grid-view deselect-file" ng-class="{ 'has-selected': photos.selected  }">
+        <div ng-repeat="item in items track by $index" ed-context-menu-item ng-click="selectItem(item)" ng-class="{ selected: itemIsSelected(item) }" class="user-item" ed-file-draggable data-id="{{ item.id }}">
+            <div class="user-item-inner">
+                <div ng-if="item.type == 'photo'" class="img-wrapper" afkl-lazy-image="{{ item.largeThumbnail+'?'+item.updated_at.replace(' ', '') }}"></div>
+                <div ng-if="item.type == 'folder'" class="folder-icon"><i class="icon icon-folder-open"></i></div>
+                <div class="user-item-caption">
+                    <div class="name">{{ item.name }}</div>
+                    <div class="size">
+                        {{ item.file_size ? utils.formatFileSize(item.file_size) : '-' }}
+                        <i ng-if="item.isFavorite" class="icon icon-star-filled"></i>
+                    </div>
+                    <div class="ago">
+                        {{ formatTime(item.updated_at) }}
+                        <div class="info" ng-if="isSmallScreen" ng-click="openRightPanel()">
+                            <i class="icon icon-info-circled-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section ng-if="selectedView === 'list' && items.length" class="user-items list-view deselect-file">
+        <div class="material-table" ng-controller="PhotosListController">
+            <div class="header" ng-if="!selectedItems.length || isSmallScreen">
+                <div class="caption">{{:: 'Photos' | translate }}</div>
+                <div class="controls">
+                    <div class="search">
+                        <input placeholder="{{:: 'search' | translate }}" type="text" ng-model="search.query">
+                        <i class="icon icon-search"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="selected-header" ng-if="selectedItems.length && ! isSmallScreen">
+                <div class="caption">{{ selectedItems.length }} {{:: 'itemsSelected' | translate }}</div>
+                <div class="controls">
+                    <i class="icon icon-trash" ng-click="deleteSelectedPhotos()"></i>
+                </div>
+            </div>
+            <div class="table table-hover">
+                <div class="table-row table-head">
+                    <div class="table-col small-col align-left">
+                        <md-checkbox aria-label="select all photos" ng-checked="selectedItems.length === items.length" ng-click="toggleAllPhotos()"></md-checkbox>
+                    </div>
+                    <div class="table-col image">{{:: 'image' | translate }}</div>
+                    <div class="table-col">{{:: 'name' | translate }}</div>
+                    <div class="table-col">{{:: 'size' | translate }}</div>
+                    <div class="table-col">{{:: 'width' | translate }}</div>
+                    <div class="table-col">{{:: 'height' | translate }}</div>
+                    <div class="table-col">{{:: 'modified' | translate }}</div>
+                </div>
+
+                <div class="table-body">
+                    <div class="table-row" dir-paginate="item in items | filter: search.query | itemsPerPage: itemsPerPage" current-page="currentPage" ng-class="{ selected: isItemSelected(item) }" ng-click="select(item)" ed-context-menu-item data-id="{{ item.id }}">
+                        <div class="table-col small-col align-left">
+                            <md-checkbox aria-label="select photo" ng-checked="isItemSelected(item)"></md-checkbox>
+                        </div>
+                        <div ng-if="item.type == 'photo'" class="table-col image"><img ng-src="{{ item.smallThumbnail+'?'+item.updated_at.replace(' ', '') }}"/></div>
+                        <div ng-if="item.type == 'folder'" class="folder-icon table-col image"><i class="icon icon-folder-open"></i></div>
+                        <div class="table-col show-phone">{{ item.name }}</div>
+                        <div class="table-col">{{ item.file_size ? utils.formatFileSize(item.file_size) : '-' }}</div>
+                        <div class="table-col">{{ item.width ? item.width+'px' : '-' }}</div>
+                        <div class="table-col">{{ item.height ? item.height+'px' : '-' }}</div>
+                        <div class="table-col">{{ utils.formatDate(item.updated_at) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+               <div class="controls">
+                   <div class="per-page">
+                       {{:: 'rowsPerPage' | translate }}
+                       <md-select ng-model="itemsPerPage">
+                           <md-option value="5">5</md-option>
+                           <md-option value="10">10</md-option>
+                           <md-option value="12">12</md-option>
+                           <md-option value="15">15</md-option>
+                           <md-option value="20">20</md-option>
+                           <md-option value="30">30</md-option>
+                           <md-option value="100">100</md-option>
+                       </md-select>
+                   </div>
+                   <div class="meta">
+                       1-{{ itemsPerPage }} {{ 'of' | translate }} {{ items.length }}
+                   </div>
+                   <dir-pagination-controls></dir-pagination-controls>
+               </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.favorites') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-star-filled"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'favoritesEmpty1' | translate }}</h4>
+            <p>{{:: 'favoritesEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.trash') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-trash"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'trashEmpty1' | translate }}</h4>
+            <p>{{:: 'trashEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.recent') && !items.length && dashboardState.recentLoaded">
+        <div class="icon">
+            <i class="icon icon-clock-1"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'recentEmpty1' | translate }}</h4>
+            <p>{{:: 'recentEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.search') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-search"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'searchEmpty1' | translate }}</h4>
+            <p>{{:: 'searchEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+   <div ng-if="utils.stateIs(['dashboard.albums', 'dashboard.albumsRoot']) && !items.length && dashboardState.loaded">
+       <section class="dropzone-outter"></section>
+
+       <div class="dropzone-inner">
+           <i class="icon icon-upload-cloud"></i>
+           <h3 ng-if=":: utils.folderUploadSupported">{{:: 'dropFilesFoldersHere' | translate }}</h3>
+           <h3 ng-if=":: !utils.folderUploadSupported">{{:: 'dropFilesHere' | translate }}</h3>
+           <div class="text-below">{{:: 'orUseBtnsAbove' | translate }}</div>
+       </div>
+       
+       <div class="phone-no-photos" ng-if=":: isSmallScreen">
+           <h1><i class="icon icon-picture"></i> {{:: 'smallScreenFolderEmpty' | translate }}</h1>
+           <p>{{:: 'smallScreenFolderEmpty2' | translate }}</p>
+       </div>
+   </div>
+</div>
+

@@ -1,0 +1,56 @@
+<div id="upload-progress-panel" class="md-whiteframe-z2" ed-upload-panel-visibility ng-if="utils.stateIs('home')">
+    <div class="header">
+        <i class="mdi mdi-file-upload"></i>
+        <div class="text">
+            <span ng-show="!uploadsInProgress">{{:: 'uploadsComplete' | translate }}</span>
+            <span ng-show="uploadsInProgress">{{:: 'uploadsInProgress' | translate }}</span>
+        </div>
+        <div class="close-panel"><i class="icon icon-cancel"></i></div>
+    </div>
+    <div ng-if="!uploadsInProgress" class="upload-complete-container">
+        <div ng-if="uploadedFiles.length">
+            <i class="icon icon-check success"></i>
+            <h2>{{:: 'uploadComplete' | translate }}</h2>
+        </div>
+        <div ng-if="!uploadedFiles.length">
+            <i class="icon icon-cancel fail"></i>
+            <h2>{{:: 'noPhotosUploaded' | translate }}</h2>
+            <p class="small-p">{{:: 'photosValidationFailed' | translate }}</p>
+        </div>
+        <p ng-if="!users.current"><a ui-sref="register">{{:: 'register' | translate }}</a> {{:: 'or' | translate }} <a ui-sref="login" class="text-lowercase">{{:: 'login' | translate }}</a> {{:: 'toSaveManageAndEdit' | translate }}</p>
+        <p ng-if="users.current">{{:: 'goTo' | translate }} <a ui-sref="dashboard.albums" class="text-lowercase">{{:: 'dashboard' | translate }}</a> {{:: 'toSaveManageAndEdit' | translate }}</p>
+        <div class="uploads-preview" ng-class="{ 'single-file': uploadedFiles.length === 1 }" ng-if="uploadedFiles.length">
+            <div class="preview" ng-repeat="file in uploadedFiles" ng-click="assignSelectedFile(file)" ng-class="{ active: selectedFile === file }">
+                <img ng-src="{{ file.mediumThumbnail }}" alt="{{ file.name }}"/>
+            </div>
+        </div>
+        <div class="links-container" ng-if="uploadedFiles.length">
+            <md-select placeholder="Type" ng-model="linkSelectModel.type">
+                <md-option ng-repeat="type in links.getLinksFor(selectedFile)" value="{{ type }}">{{ utils.trans(type) }}</md-option>
+            </md-select>
+            <md-select placeholder="Size" ng-model="links.activeSize" ng-disabled="linkSelectModel.type === 'linkToPhoto' || linkSelectModel.type === 'downloadLink'">
+                <md-option ng-repeat="(name, method) in links.linkSizes" value="{{ method }}">{{ utils.trans(name) }}</md-option>
+            </md-select>
+            <input class="link-input" onclick="this.select()" value="{{ links[linkSelectModel.type](selectedFile) }}" readonly>
+        </div>
+    </div>
+    <table class="table table-condensed files-list" ng-if="uploadsInProgress">
+        <tbody>
+        <tr ng-repeat="file in uploadHistory">
+            <td class="file-name"><i class="mdi-image"></i><div class="name">{{ file.name }}</div></td>
+            <td class="file-size">
+                <span ng-if="!file.uploaded">{{ file.bytesUploaded }} / </span>
+                {{ utils.formatFileSize(file.size) }}
+                <span class="uploaded" ng-if="file.uploaded && ! file.rejected">{{:: 'uploaded' | translate }}</span>
+            </td>
+            <td class="file-upload-progress">
+                <md-progress-linear ng-show="!file.uploaded" md-mode="determinate" ng-value="file.percentageUploaded"></md-progress-linear>
+                <div ng-show="file.uploaded">
+                    <div ng-show="!file.rejected">{{:: 'uploaded' | translate }}</div>
+                    <div ng-show="file.rejected" class="rejected">{{:: 'rejected' | translate }}</div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

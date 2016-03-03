@@ -1,0 +1,342 @@
+@import (reference) 'main.less';
+
+@preview-sidebar-width: 400px;
+@preview-nav-height: 60px;
+@infobar-color: #161617;
+@preview-bg: lighten(#212124, 3%);
+
+.info-bar {
+    height: @preview-nav-height;
+    background-color: @preview-bg;
+    padding: 0 15px;
+    color: #fff;
+
+    &.open {
+        .dropdown-menu {
+            display: block;
+        }
+    }
+
+    .logo {
+        width: 140px;
+        height: auto;
+        float: left;
+        margin-top: 10px;
+        cursor: pointer;
+
+        > img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .login-buttons {
+        float: right;
+        padding-top: 7px;
+
+        > .md-button {
+            box-shadow: none;
+            margin-top: 11px;
+        }
+    }
+
+    > .actions {
+        margin-right: @preview-sidebar-width - 200px;
+        float: right;
+
+        > .md-button {
+            font-size: 23px;
+            line-height: @preview-nav-height;
+            padding: 0 5px;
+
+           > md-icon {
+               color: #fff;
+           }
+        }
+
+        @media screen and (max-width: 1200px) {
+            margin-right: 15px;
+        }
+    }
+
+    .logged-in-container {
+        float: right;
+        padding: 12px 15px 0;
+        cursor: pointer;
+
+        > .dropdown > a {
+            color: #fff;
+            margin-left: 5px;
+        }
+
+        img {
+            width: 35px;
+            height: 35px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        a {
+            display: inline-block;
+        }
+    }
+}
+
+#preview-file {
+    flex: 1 1 auto;
+    background-color: @preview-bg;
+    height: 100%;
+    position: relative;
+
+    .ad-container {
+        margin-top: 30px;
+        padding: 0 40px;
+    }
+
+    .footer {
+        background-color: @preview-bg;
+        height: 50px;
+        padding: 0 20px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: #fff;
+
+        > .name {
+            line-height: 50px;
+            float: left;
+            font-size: 17px;
+            width: 20%;
+
+            > .icon {
+                color: @primary-palette;
+                margin-right: 10px;
+            }
+        }
+
+        > .description {
+            float: right;
+            line-height: 50px;
+            margin: 0;
+            width: 80%;
+            text-align: right;
+            font-size: 16px;
+        }
+
+    }
+
+    .shareable-preview {
+        height: ~"calc(100% - 110px)";
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 40px;
+
+        &.ad-above {
+            height: ~"calc(100% - 230px)";
+        }
+    }
+
+    .description {
+        margin: 30px auto 0;
+        text-align: center;
+    }
+
+    .overlay {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        background: linear-gradient(to bottom, rgba(236, 239, 241, 0) 0%, @dashboard-background 100%);
+        pointer-events: none;
+    }
+
+    .folder-photo-wrapper {
+        width: 25%;
+        display: inline-block;
+        margin-bottom: 15px;
+        cursor: zoom-in;
+
+        > .folder-photo {
+            width: 96%;
+            margin-left: 2.5%;
+            .md-whiteframe-z1();
+            background-image: url('../images/canvas-bg.png');
+
+        }
+    }
+
+    .photo-wrapper {
+        flex: 1 1 auto;
+        height: 100%;
+        width: 100%;
+    }
+
+    .photo {
+        display: block;
+        max-height: 100%;
+        max-width: 100%;
+        height: auto;
+        cursor: zoom-in;
+        margin: 0 auto;
+        .md-whiteframe-z2();
+        background-image: url('../images/canvas-bg.png');
+    }
+}
+
+#preview-sidebar {
+    flex: 0 0 @preview-sidebar-width;
+    background-color: #fff;
+    height: 100%;
+    .md-whiteframe-z1();
+    padding: 20px 25px;
+    position: relative;
+
+    .social-icons {
+        margin: 0 auto 20px;
+        width: 280px;
+
+        > .social-icon {
+            box-shadow: none;
+        }
+    }
+
+    .md-tabs {
+        height: 100%;
+
+        md-tab-content {
+            padding-top: 30px;
+        }
+    }
+}
+
+#preview-container {
+    display: flex;
+    height: 100%;
+    background-color: @preview-bg;
+
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+
+        .overlay {
+            display: block;
+        }
+
+        #preview-sidebar {
+            flex: 1 1 auto;
+            height: initial;
+            overflow: auto;
+        }
+
+        #preview-file {
+            overflow: hidden;
+            flex: 0 0 auto;
+            height: 40%;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .folder-photo-wrapper {
+            width: 50%;
+        }
+    }
+}
+
+.pswp {
+    .pswp__ui--idle .pswp__top-bar {
+        opacity: 1 !important;
+    }
+
+    .custom-button {
+        background: none;
+        color: #fff;
+        font-size: 18px;
+    }
+
+    .preview-name {
+        color: darken(#fff, 15%);
+        float: left;
+        padding: 8px 10px;
+        margin-left: 5px;
+
+        > i {
+            color: @primary-palette;
+            font-size: 17px;
+            position: relative;
+            top: 2px;
+            margin-right: 8px;
+        }
+
+        &.multiple-slides {
+            margin-left: 40px;
+        }
+    }
+}
+
+#password-outter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    background-color: @dashboard-background;
+    padding-bottom: 5%;
+
+    .logo {
+        width: 200px;
+        margin: 10px auto 40px;
+    }
+}
+
+#photo-password-container {
+    width: 35%;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 25px;
+    .md-whiteframe-z2();
+
+    .md-button {
+        margin-top: 10px;
+    }
+
+    > p {
+        text-align: center;
+        font-size: 17px;
+    }
+
+    > form {
+        padding: 0 32px;
+    }
+}
+
+//phone
+@media screen and (max-width: 530px) {
+   .info-bar {
+       padding: 0 10px;
+
+       .actions {
+           position: static;
+           padding: 10px 0;
+           float: left;
+       }
+
+       .login-buttons {
+           padding-top: 0;
+       }
+
+       .logo {
+           display: none;
+       }
+   }
+
+   #preview-file > .footer {
+       .description {
+           display: none;
+       }
+
+       .name {
+           width: 100%;
+       }
+   }
+}

@@ -1,0 +1,393 @@
+
+#Login Page
+wrongCredentials: Wrong email address or password
+noAccount: Don't have an account?
+registerHere: Register here.
+login: Login
+password: Password
+email: Email
+enterYourTwitterEmail: Please enter your twitter email
+userWithEmailExists: User with this email already exists.
+enterYourPassword: Enter your password
+requestPassword: An account with this email address already exists, if you want to connect the two accounts please enter existing accounts password in the field below.
+wrongPassword: Password seems to be incorrect, please try again.
+connect: Connect
+genericSocialError: An error occured, please try again later.
+rememberMe: Remember me
+loginWithFacebook: Login with facebook
+loginWithTwitter: Login with twitter
+loginWithGoogle: Login with google
+orLoginWith:  Or login with:
+
+#Register Page
+alreadyHaveAccount: Already have an account?
+repeatPassword: Repeat Password
+logInHere: Login in here.
+register: Register
+
+#Dashboard
+choosePreset: Choose a Preset
+minWidth: Minimum width is {{ value }}.
+maxWidth: Maximum height is {{ value }}.
+mustBeNumber: Please enter a number.
+cantBeEmpty: Please enter something.
+width: Width
+itemsSelected: Items Selected
+height: Height
+useCustomDims: Use custom dimensions
+openImage: Open Image
+designs: Designs
+upload: Upload
+cancel: Cancel
+create: Create
+createNewAlbum: Create a New Album
+name: Name
+folderAlreadyExists: Folder with that name already exists.
+newAlbumCreated: New album created successfully!
+folders: Folders
+newImage: New Image
+createNewImage: Create a New Image
+newFolder: New Folder
+uploading: Uploading
+images: Images
+rename: Rename
+uploadsInProgress: Uploads In Progress
+uploadsComplete: Uploads Completed
+rejected: Rejected
+sizeBigFirst: Size - bigger first
+sizeSmallFirst: Size - smaller first
+type: Type
+modified: Modified
+recentlyModified: Recently Modified
+uploadDndExpl: You can drag and drop your photos or folders anywhere on the page to upload them.
+uploadDndExplNoFolder: You can drag and drop your photos anywhere on the page to upload them.
+new: New
+photo: Photo
+orderBy: Order By
+showGallery: Show Gallery
+albums: Albums
+album: Album
+moreOptions: More Options
+rootAlbumDesc: Base Album. All photos not uploaded or moved to a specific album will end up here.
+rootAlbum: Root Album
+sortOptions: Sort Options
+zoom: Zoom
+size: Size
+searchResults: Search Results
+details: Details
+activity: Activity
+renamed: Renamed
+locate: Locate
+getLinks: Get Links
+favoritesEmpty1: You have not added anything to your favorites yet.
+favoritesEmpty2: Add photos to favorites to easily find them later.
+trashEmpty1: There is nothing in your trash currently.
+trashEmpty2: Delete photos to move them to trash automatically. Delete photos from trash to remove them permanently.
+recentEmpty1: There are not recent photos.
+recentEmpty2: Once you upload some photos, most recent ones will appear here.
+searchEmpty1: No results.
+searchEmpty2: Couldn't find any albums or photos matching your search query.
+dropFilesFoldersHere: Drop files and folders here
+dropFilesHere: Drop files here
+smallScreenFolderEmpty: No photos in this album yet.
+smallScreenFolderEmpty2: Use the new button above to upload some.
+orUseBtnsAbove: Or use one of the orange buttons above.
+toggleView: Toggle grid and list view
+searchPhotosAlbums: Search for Photos and Albums
+maxSimultUploadsWarning: You can only upload {{ number }} photos at the same time.
+maxSimultUploads: Maximum simultaneous uploads.
+maxSimultUploadsExpl: How many photos user can upload at the same time.
+
+#Right Panel
+uploadActivity: uploaded
+items: Items
+allFolders: All Folders
+ago: ago
+created: Created
+folder: Folder
+noFileOrFolderSelected: Select a file or folder to view it's details.
+openInEditor: Open in Photo Editor
+addToFavorites: Add to Favorites
+description: Description
+photos: Photos
+none: None
+yes: Yes
+no: No
+empty: Empty
+protected: Protected
+
+#Left Panel
+trash: Trash
+recent: Recent
+favorites: Favorites
+
+#Presets
+socialMedia: Social Media
+presentation: Presentation
+facebookCover: Facebook Cover
+facebookPost: Facebook Post
+twitterPost: Twitter Post
+instagramPost: Instagram Post
+
+#Navbar
+searchPhotosAndFolder: Search Photos and Folders
+editUsername: Edit Username
+changeAvatar: Change Avatar
+logOut: Log Out
+accountSettings: Account Settings
+confirm: Confirm
+noMatches: No photos or folders that match your search found.
+dashboard: Dashboard
+links: Links
+comments: Comments
+
+#Account
+username: Username
+firstName: First Name
+lastName: Last Name
+gender: Gender
+male: Male
+female: Female
+notSaying: Not Saying
+oldPassword: Old Password
+passwordChangeSuccess: Your password was changed successfully.
+avatarAcceptedFormats: Accepted formats: png, jpeg.
+avatarResizeExpl: Your avatar will be resized to 200x200 (px) if it's bigger then that.
+view: View
+
+#Responses
+genericError: Something went wrong, please try again later.
+favoriteSuccess: Added item to favorites successfully.
+favoriteDetachSuccess: Removed item from favorites successfully.
+favoriteExists: You have already marked this photo as favorite.
+passMatches: Password is correct.
+noSpaceLeft: You are out of space. Please delete some photos.
+passDoesntMatch: Incorrect password. Please try again.
+descriptionUpdated: Description updated successfully.
+noPermissions: You don't have permissions to do that.
+profileUpdateSuccess: You profile was updated successfully.
+avatarRemoveSuccess: Removed avatar successfully.
+PhotoCopySuccess: Copied photo successfully.
+folderDownloadProbelm: There was a problem with downloading this album, please try again later.
+nothingToPreview: This album is empty.
+folderRenameSuccess: Renamed folder successfully.
+photoMovedToTrash: Photo has been moved to trash.
+movedToTrash: Moved {{ number }} items to trash.
+permaDeletedItems: Permanently deleted {{ number }} items.
+permaDeleteAlbumWarning: Are you sure you want to delete this album?
+deleteItems: Delete Items
+sureWantToDeleteItems: Are you sure you want to delete these items?
+photoRenameSuccess: Photo renamed successfully.
+photoMoveSuccess: Moved photo successfully.
+noPermissions: You don't have the required permissions to access this page.
+createdUserSuccessfully: Created user successfully.
+updatedUserSuccessfully: Updated user successfully.
+settingsUpdated: Updated settings successfully.
+folderDownloadProblem: There was a problem with downloading this folder. Please try again later.
+logOutSuccess: Logged out successfully.
+savedPhotoSuccessfully: Saved photo successfully.
+photoRestoreSuccess: Restored photo successfully.
+photoAttachSuccess: Attached :number photo(s) to your account that you have uploaded while logged out.
+deletedUsers: Deleted :number users.
+registrationDisabled: Registration is disabled.
+
+#Trash
+deleteForever: Delete Forever
+confirmPermaDelete: Are you sure you want to permanently delete these photo(s)?
+delete: Delete
+permaDeleteWarning: Warning: this action is not undoable.
+restore: Restore
+
+#Context menu
+preview: Preview
+openInEditor: Open in editor
+share: Share
+getLink: Get link
+moveTo: Move to
+favorite: Favorite
+manageVersions: Manage versions...
+makeACopy: Make a copy
+download: Download
+remove: Remove
+
+#Share Panel
+passwordAddSuccess: Added password successfully.
+passwordRemoveSuccess: Removed password successfully.
+linkToShare: Link to share
+notPassProtected: Anyone with the link can see this
+passProtected: is password protected
+this: This
+addPassword: Add password.
+remove: Remove.
+add: Add
+done: Done
+photoPassMessage: This photo is password protected. Enter it in the field below to view the photo.
+albumPassMessage: This album is password protected. Enter it in the field below to view the album.
+facebookShare: Share on Facebook
+twitterShare: Tweet
+pinterestShare: Pin it
+
+# Password reset
+passwordRecovery: Password Recovery
+sendEmail: Send Email
+passResetExpl: Please enter the email address associated with your account.
+resetPassword: Reset Password
+resetErrors: There were some problems with your input.
+emailAddress: E-Mail Address
+confirmPassword: Confirm Password
+newPassword: New Password
+forgot: Forgot?
+
+# Admin
+users: Users
+enablePushState: Enable HTML5 Pushstate mode
+settings: Settings
+deleted: Deleted
+of: of
+createNewUser: Create a New User
+search: Search
+editUser: Edit User
+edit: Edit
+analytics: Analytics
+avatar: Avatar
+rowsPerPage: Rows per page:
+googleAnalyticsCode: Google analytics tracking code
+mandrillExpl: Your mandrill API Key. Required to make mail (for password reset and other functions) work. You can use an smtp server as well but mandrill is more reliable and will cause less problems.
+usersSelected: users selected
+inTrash: In Trash
+photosSelected: photos selected
+uploadedAt: Uploaded At
+uploaded: Uploaded
+dateLocale: Date Locale
+dateLocaleExpl: Locale you want dates formated in. ISO 639-1 code.
+ads: Ads
+siteName: Site Name
+metaTitle: Meta Title
+metaDescription: Meta Description
+metaKeywords: Meta Keywords
+generalSettings: General Site Settings
+photosValidation: Photos Validation
+maxUserSpace: Disk space for each user
+maxUserSpaceExpl: How much space each users photos are allowed to take on your server. In bytes.
+converter: Converter
+used: used
+maxFileSize: Maximum File Size
+maxFileSizeExpl: The maximum photo file size that users are able to upload. In megabytes.
+allowedFormats: Allowed Formats
+allowedFormatsExpl: The photo formats that users are allowed to upload. Separate each one with a comma.
+disqusShortname: Disqus Shortname
+disqusShortnameExpl: Your disqus shortname, required in order for comments to work.
+id: ID
+secret: Secret
+3rdPartyServiceKeys: Third Party Service Keys
+socialLoginKeysExpl: Enter your credentials for social login services below. You can find information on how to get them in the documentation.
+enableRegistration: Enable Registration
+enableRegistrationExpl: If this is set to 'No', registration page and all links/references will be disabled and users will not be able to register on their own.
+adminArea: Admin Area
+homepage: Homepage
+homeTagline: Home Tagline
+homeTaglineExpl: This will appear on your homepage (if it's set to landing page), right below the navbar.
+homeByline: Home Byline
+homeBylineExpl: This will appear on your homepage (if it's set to landing page), right below the tagline.
+homeButtonText: Home Button Text
+homeButtonTextExpl: Text of the button that appears under home byline.
+landingPage: Landing Page
+loginPage: Login Page
+customPage: Custom Page
+homepageExpl: What page do you want to display as your homepage.
+customHomepagePath: Custom Homepage Path
+customHomepagePathExpl: Path to your custom homepage file. Relative to root folder or url on internet.
+metaInformation: Meta Information
+validation: Validation
+notAttachedToUser: Only show photos not attached to user.
+
+# Homepage
+random: Random
+toSaveManageAndEdit: to save, manage and edit your uploaded photos.
+goTo: Go to
+uploadComplete: Upload Complete
+noPhotosUploaded: No photos have been uploaded
+photosValidationFailed: Your photos seem to have failed our validation. Please try again.
+photosWaiting: You have recently uploaded {{number}} photos. <a ui-sref="login">Login</a> or <a ui-sref="register">Register</a> to edit them. <i class="icon icon-cancel"></i>
+homeTitle: Photo hosting, management and editing.
+enableHomeUpload: Enable homepage uploading
+enableHomeUploadExpl: Should users be able to upload their photos from homepage while not logged in.
+loginToUpload: Please register or login to upload your photos.
+
+# Titles
+loginTitle: Login
+registerTitle: Register
+resetPasswordTitle: Reset Password
+albumsRoot: Albums
+
+# Editor
+photoEditor: Photo Editor
+backToDashboard: Back to Dasbhoard
+uploadFromComputer: Upload From Computer
+layers: Layers
+noLayersYet: No layers yet.
+noHistoryYet: No history items yet.
+basics: Basics
+text: Text
+drawing: Drawing
+close: Close
+outlineWidth: Outline Width
+filters: Filters
+stickers: Stickers
+shapes: Shapes
+crop: Crop
+rotate: Rotate
+angle: Angle
+apply: Apply
+resize: Resize
+percentage: Percentage
+maintainAspectRatio: Maintain Aspect Ratio
+usePercentages: Use Percentages
+round: Round
+radius: Radius
+color: Color
+canvasBgColor: Canvas Background Color
+pickFont: Pick a Font
+merge: Merge
+fontSize: Font Size
+opacity: Opacity
+background: Background
+outline: Outline
+lineHeight: Line Height
+outlineWidth: Outline Width
+save: Save
+pickBrush: Pick a Brush
+brush: Brush
+brushThickness: Brush Thickness
+blur: Blur
+offsetX: Offset X
+offsetY: Offset Y
+pickFilter: Pick a Filter
+pickShape: Pick a Shape
+image: Image
+gradient: Gradient
+sticker: Sticker
+opacity: Opacity
+history: History
+layers: Layers
+fitToScreen: Fit to screen
+originalSize: Original size
+imageUrl: Image URL
+or: or
+uploadFromComputer: Upload From Computer
+fileName: File Name
+quality: Quality
+createNew: Create New
+sample: Sample
+
+#links
+linkToAlbum: Link to Album
+linkToPhoto: Link to Photo
+directLink: Direct Link
+downloadLink: Download Link
+htmlEmbedCode: HTML Embed Code
+forumEmbedCode: Forum Embed Code
+original: Original
+smallThumbnail: Small Thumbnail
+mediumThumbnail: Medium Thumbnail
+largeThumbnail: Large Thumbnail

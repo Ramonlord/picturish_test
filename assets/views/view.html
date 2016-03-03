@@ -1,0 +1,140 @@
+<div id="preview-container" ng-if="!passContainerVisible">
+    <section id="preview-file">
+        <div class="info-bar" ng-if="!passContainerVisible">
+            <div class="logo"><img ng-src="{{:: baseUrl+'assets/images/logo_light.png' }}" alt="logo"/></div>
+
+            <div class="logged-in-container" ng-show="users.current" data-toggle="dropdown">
+                <div class="dropdown">
+                    <img ng-src="{{ users.getAvatar() }}"/>
+                    <a href="">{{ users.getUsernameForCurrentUser() }}</a>
+                    <span class="caret"></span>
+                    <ul class="dropdown-menu">
+                        <li ng-if="users.current.isAdmin" ui-sref="admin.analytics"><a href=""><i class="icon icon-lock-filled"></i>{{:: 'adminArea' | translate }}</a></li>
+                        <li ui-sref="dashboard.albums"><a href=""><i class="icon icon-gauge"></i>{{:: 'dashboard' | translate }}</a></li>
+                        <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                        <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                        <li class="separator"></li>
+                        <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-params"></i> {{:: 'accountSettings' | translate }}</a></li>
+                        <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="login-buttons" ng-if="!users.current">
+                <md-button ui-sref="register">{{:: 'register' | translate }}</md-button>
+                <md-button ui-sref="login" class="md-primary md-raised">{{:: 'login' | translate }}</md-button>
+            </div>
+
+            <div class="actions">
+                <md-button ed-download-shareable="isFolder() ? 'folder' : 'photo'" ed-tooltip="{{:: 'download' | translate }}"><md-icon md-font-icon="icon icon-download"></md-icon></md-button>
+                <md-button ng-click="openGallery(shareable.photos || shareable)" ed-tooltip="{{:: 'zoom' | translate }}"><md-icon md-font-icon="icon icon-zoom-in"></md-icon></md-button>
+                <md-button id="more-options" ng-if="closeButtonVisible" ed-more-options-menu ed-tooltip="{{:: 'moreOptions' | translate }}"><md-icon md-font-icon="icon icon-ellipsis-vert"></md-icon></md-button>
+                <md-button ng-if="closeButtonVisible" ng-click="toDashboard()" ed-tooltip="{{:: 'backToDashboard' | translate }}"><md-icon md-font-icon="icon icon-cancel"></md-icon></md-button>
+            </div>
+        </div>
+        <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+        <div class="shareable-preview" ng-class="{ 'ad-above': ad1 }">
+            <div ng-if="isFolder()" class="folder-photo-wrapper" ng-repeat="photo in shareable.photos">
+                <img class="folder-photo" ng-click="openGallery(shareable.photos, $index)" ng-src="{{ photo.largeThumbnail }}" alt="{{ photo.description }}"/>
+            </div>
+
+            <div ng-if="isFolder()" class="overlay"></div>
+
+            <div class="photo-wrapper" ng-if="!isFolder()">
+                <img class="photo" ng-click="openGallery(shareable)" ng-src="{{ shareable.absoluteUrl }}" alt="{{ shareable.description }}"/>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="name"><i class="icon icon-{{ shareable.folder_id ? 'picture' : 'folder-open' }}"></i> {{ shareable.name }}</div>
+            <div class="description">{{ shareable.description || (shareable.file_size ? utils.formatFileSize(shareable.file_size) : '') }}</div>
+        </div>
+    </section>
+    <section id="preview-sidebar">
+        <md-tabs md-stretch-tabs="always" class="md-tabs" md-selected="2" md-dynamic-height>
+            <md-tab label="{{:: 'comments' | translate }}">
+                <ed-disqus></ed-disqus>
+                <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+            </md-tab>
+            <md-tab label="{{:: 'links' | translate }}">
+                <ed-share-icons></ed-share-icons>
+                <ed-shareable-links ed-generate-nav="{{:: !isFolder() }}"></ed-shareable-links>
+                <div class="ad-container" ng-if="ad2" ng-bind-html="ad2"></div>
+            </md-tab>
+        </md-tabs>
+    </section>
+</div>
+
+<div id="password-outter-container" ng-if="passContainerVisible">
+    <section id="photo-password-container">
+
+        <div class="logo"><img ng-src="{{ baseUrl+'assets/images/logo_dark.png' }}" class="img-responsive" alt="logo"/></div>
+
+        <p ng-if="type == 'photo'">{{:: 'photoPassMessage' | translate }}</p>
+        <p ng-if="type == 'folder'">{{:: 'albumPassMessage' | translate }}</p>
+
+        <form ng-submit="checkPassword()" name="passwordForm">
+            <md-input-container>
+                <label for="password">{{:: 'password' | translate }}</label>
+                <input ng-model="$parent.password" name="password" id="password" type="password" required>
+                <div class="error" ng-if="$parent.error">{{ $parent.error }}</div>
+            </md-input-container>
+
+            <div class="pull-right">
+                <md-button type="button" ng-click="goHome()">{{:: 'cancel' | translate }}</md-button>
+                <md-button type="submit" class="md-primary md-raised">{{:: 'view' | translate }}</md-button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="preview-name" ng-class="{ 'multiple-slides': shareable.photos && shareable.photos.length > 1 }">
+                    <i  ng-class="type === 'photo' ? 'icon-picture' : 'icon-folder-open'" class="icon"></i>
+                    {{ shareable.name }}
+                    <span ng-if="type === 'folder'">{{:: 'album' | translate }}</span>
+                </div>
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <button class="pswp__button custom-button" title="Download" ed-download-shareable><i class="icon icon-download"></i></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul id="context-menu" ed-context-menu></ul>
+<div ng-include="'assets/views/modals.html'"></div>
